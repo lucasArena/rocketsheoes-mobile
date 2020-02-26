@@ -33,12 +33,10 @@ export const Logo = styled.Image.attrs({
 `
 
 export const BasketContainer = styled(TouchableOpacity)`
-    height: 24px;
-    width: 24px;
+    width: 60px;
     flex: 1;
-    border: 1px solid #7159c1;
-    align-items: flex-end;
-    justify-content: flex-end;
+    align-items: center;
+    justify-content: center;
     flex-direction: row;
 `
 
