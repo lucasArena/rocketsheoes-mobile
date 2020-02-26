@@ -2,7 +2,7 @@ import React from 'react'
 import { Text } from 'react-native'
 
 function Main () {
-  return (<Text>Main</Text>)
+  return (<Text>MAIN</Text>)
 }
 
 export default Main
