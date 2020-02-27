@@ -6,7 +6,18 @@ import { updateAmountSuccess, addToCartSuccess } from './actions'
 function * addToCart ({ id }) {
   const product = yield call(api.get, `/products/${id}`)
 
-  yield put(addToCartSuccess(product))
+  const existsProduct = yield select(state => state.cart.find(p => p.id === id))
+  const currentAmount = existsProduct ? existsProduct.amount : 0
+  console.tron.log(currentAmount)
+  if (existsProduct) {
+    yield put(updateAmountSuccess(id, (currentAmount + 1)))
+  } else {
+    const data = {
+      ...product,
+      amount: 1
+    }
+    yield put(addToCartSuccess(data))
+  }
 }
 
 function * updateAmount ({ id, amount }) {

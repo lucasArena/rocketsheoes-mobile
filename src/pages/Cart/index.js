@@ -23,22 +23,24 @@ import { useSelector } from 'react-redux'
 
 function Cart () {
   const cart = useSelector(state =>
-    console.tron.log(state)
+    state.cart.map(product => ({
+      ...product,
+      amount: String(product.amount),
+      formattedPrice: formatPrice(product.price),
+      subtotal: formatPrice(product.price * product.amount)
+    }))
   )
-  const products =
-    [
-      {
-        id: 1,
-        title: 'Tênis de Caminhada Leve Confortável',
-        price: formatPrice(179.9),
-        image: 'https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/modulo-redux/tenis1.jpg'
-      }
-    ]
+
+  const total = useSelector(state =>
+    formatPrice(state.cart.reduce((total, product) => {
+      return total + product.price * product.amount
+    }, 0))
+  )
 
   return (
     <Container>
       <CartList
-        data={products}
+        data={cart}
         keyExtrator={(product) => product.id}
         renderItem={({ item }) => (
           <>
@@ -46,24 +48,12 @@ function Cart () {
               <Image source={{ uri: item.image }} />
               <ContainerInfo>
                 <Title>{item.title}</Title>
-                <Price>{item.price}</Price>
+                <Price>{item.formattedPrice}</Price>
               </ContainerInfo>
             </ Product>
             <TotalInfo>
-              <Amount value="3" />
-              <SubTotal>{formatPrice(300)}</SubTotal>
-            </TotalInfo>
-
-            <Product>
-              <Image source={{ uri: item.image }} />
-              <ContainerInfo>
-                <Title>{item.title}</Title>
-                <Price>{item.price}</Price>
-              </ContainerInfo>
-            </ Product>
-            <TotalInfo>
-              <Amount value="3" />
-              <SubTotal>{formatPrice(300)}</SubTotal>
+              <Amount value={item.amount} />
+              <SubTotal>{item.subtotal}</SubTotal>
             </TotalInfo>
           </>
         )}
@@ -71,7 +61,7 @@ function Cart () {
 
       <TotalContainer>
         <TotalText>Total</TotalText>
-        <Total>R$1565,00</Total>
+        <Total>{total}</Total>
       </TotalContainer>
       <FinishButton>
         <FinishButtonText>FINALIZAR PEDIDO</FinishButtonText>

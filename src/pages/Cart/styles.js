@@ -2,7 +2,9 @@ import styled from 'styled-components/native'
 
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
-export const Container = styled.View`
+export const Container = styled.ScrollView.attrs({
+  showsVerticalScrollIndicator: false
+})`
   margin: 20px;
   background: #FFF;
   border-radius: 4px;
@@ -11,7 +13,6 @@ export const Container = styled.View`
 export const CartList = styled.FlatList.attrs({
   showsVerticalScrollIndicator: false
 })`
-  max-height: 400px;
 `
 
 export const Product = styled.View`
@@ -95,6 +96,8 @@ export const FinishButton = styled(TouchableOpacity)`
   border-radius: 4px;
   padding: 15px 10px;
   margin-top: 20px;
+  margin-bottom: 30px;
+
 `
 export const FinishButtonText = styled.Text`
   text-align: center;

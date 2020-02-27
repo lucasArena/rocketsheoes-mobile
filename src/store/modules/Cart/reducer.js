@@ -7,12 +7,12 @@ export default function reducer (state = [], action) {
         const { product } = action
         draft.push(product)
       })
-    case '@cart/AMOUNT_UPDATE_SUCCESS':
+    case '@cart/UPDATE_AMOUNT_SUCCESS':
       return produce(state, draft => {
         const { id, amount } = action
         const productIndex = draft.findIndex(p => p.id === id)
 
-        draft.cart[productIndex].amount = amount
+        draft[productIndex].amount = amount
       })
 
     case '@cart/REMOVE':

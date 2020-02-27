@@ -9,7 +9,7 @@ if (__DEV__) {
     .use(reactotronSaga())
     .connect({ host: '192.168.15.67' })
 
-  console.tron = tron
-
   tron.clear()
+
+  console.tron = tron
 }

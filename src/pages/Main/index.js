@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
 import { ProductList, Product, Image, Title, Price, AddButton, ProductAmount, ProductAmountText, AddButtonText } from './styles'
@@ -26,6 +26,13 @@ function Main () {
     loadProducts()
   }, [])
 
+  const amount = useSelector(state =>
+    state.cart.reduce((amountSum, product) => {
+      amountSum[product.id] = product.amount
+      return amountSum
+    }, {})
+  )
+
   function handleAdd (id) {
     dispatch(CartActions.addToCartRequest(id))
   }
@@ -42,7 +49,7 @@ function Main () {
           <AddButton onPress={() => handleAdd(item.id)}>
             <ProductAmount>
               <Icon name="add-shopping-cart" color="#FFF" size={20} />
-              <ProductAmountText>{3}</ProductAmountText>
+              <ProductAmountText>{amount[item.id] || 0}</ProductAmountText>
             </ProductAmount>
             <AddButtonText>Adicionar</AddButtonText>
           </AddButton>
