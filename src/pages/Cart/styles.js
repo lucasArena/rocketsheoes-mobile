@@ -2,7 +2,7 @@ import styled from 'styled-components/native'
 
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
-export const Container = styled.ScrollView.attrs({
+export const Container = styled.SafeAreaView.attrs({
   showsVerticalScrollIndicator: false
 })`
   margin: 20px;
@@ -13,6 +13,7 @@ export const Container = styled.ScrollView.attrs({
 export const CartList = styled.FlatList.attrs({
   showsVerticalScrollIndicator: false
 })`
+  max-height: 250px
 `
 
 export const Product = styled.View`
