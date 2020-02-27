@@ -19,8 +19,12 @@ import {
 } from './styles'
 
 import { formatPrice } from '../../utils/format'
+import { useSelector } from 'react-redux'
 
 function Cart () {
+  const cart = useSelector(state =>
+    console.tron.log(state)
+  )
   const products =
     [
       {
